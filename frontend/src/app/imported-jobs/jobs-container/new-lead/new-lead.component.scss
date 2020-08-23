@@ -1,0 +1,83 @@
+.companies-info{
+    padding:10px;
+    background-color:white;
+    border:1px solid white;
+    border-radius: 10px;
+.companies-title h5{
+    font-size:16px;
+}
+.companies-subtitle{
+    font-size:18px;
+    font-weight:bold;
+}
+.region-list{
+    ul{
+        list-style:none;
+        padding:0;   
+    }
+    li a{
+        line-height:40px
+    }
+  }
+}
+  
+
+.companies-table {
+    font-size:14px;
+      
+            thead{
+            background-color:#052337;
+            color:white;
+         
+            }   
+                .company-icon{
+                    width:50px;
+                    height:50px;
+                }
+                        .company-icon-user img{
+                            border:none;
+                            border-radius:50px;
+                            width:50px;
+                            height:50px;
+                }
+  
+            }
+
+
+            .companies-list-header{
+                background-color:#264361;
+                border: none;
+                color:white;
+                border-radius:5px;
+                list-style: none;
+                font-size:13px;  
+            }
+
+            .companies-list{
+                font-size:13px;
+                //  img{
+                //     width:50px;
+                //     height:50px;
+                // }
+            }
+
+
+.companies-search-bar {
+    width: 30%;    
+    position: relative;
+    input {
+        padding-right: 36px;
+    }
+    img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+};
+
+.companies-wrapper {
+    overflow-x: scroll;
+    .companies {
+        min-width: 1200px;
+    }
+}

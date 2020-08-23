@@ -1,0 +1,198 @@
+<form [formGroup]="editForm" autocomplete="off">
+    <div class="p-4 edit-company">
+        <div class="field">
+            <div class="d-flex justify-content-between">
+                <h4>Edit Company Information</h4>
+                <a class="close-god" (click)='close()'>X</a>
+            </div>
+            <div class="field-row">
+                <div class="row">
+                    <div class="col-2">
+                        <p>Legal Name</p>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" class="form-control" placeholder="Enter legal name" formControlName="name">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <h4>Contact</h4>
+            <hr>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-2">
+                        <p>Email <span class="star">*</span></p>
+                    </div>
+                    <div class="col-7" formArrayName="emails">
+                        <ng-container *ngFor="let item of editCtrls.emails['controls']; let i = index">
+                                <input type="email" class="form-control" placeholder="Email" [formControlName]="i"
+                                    [ngClass]="{'is-invalid': editCtrls.emails.at(i).invalid  && editCtrls.emails.at(i).touched }">
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="row mb-3">
+                    <div class="col-2">
+                        <p>Phone <span class="star">*</span></p>
+                    </div>
+                    <div class="col-7">
+                        <ng-container *ngFor="let item of editCtrls.phones['controls']; let i = index"
+                            formArrayName="phones">
+                            <ng-container [formGroupName]="i">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <select class="form-control" id="country-index" formControlName="country_code">
+                                            <option value="" disabled>Country </option>
+                                            <option [value]="code.country_code"
+                                                *ngFor="let code of countryCodes | async;">
+                                                {{  code.country }}
+                                                (+{{  code.country_code }})
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" placeholder="Phone number"
+                                            formControlName="number"
+                                            [ngClass]="{'is-invalid': editCtrls.phones.at(i).get('number').invalid  && editCtrls.phones.at(i).get('number').touched }">
+                                    </div>
+                                </div>
+
+
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row mb-3">
+                <div class="row mb-3">
+                    <div class="col-2">
+                        <p>Address <span class="star">*</span></p>
+                    </div>
+                    <div class="col-7" formGroupName="addresses">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="label-control" for="Apartament">Apartament</label>
+                                <input type="text" class="form-control" placeholder="Enter Apartament" id="Apartament"
+                                    formControlName="apartament">
+                            </div>
+                            <div class="col-6">
+                                <label for="place" class="label-control">Postal code</label>
+                                <input type="text" class="form-control" placeholder="Enter" id="place"
+                                    formControlName="postal_code">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ng-container formGroupName="location">
+                                <div class="col-4">
+                                    <label for="country" class="label-control">Country</label>
+                                    <select id="country" class="form-control" formControlName="country"
+                                        (change)='getListOfCities($event)'>
+                                        <option value="" disabled>Select Country</option>
+                                        <option *ngFor="let country of listOfCountries" [value]="country.asc">
+                                            {{ country.name }}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="city" class="label-control">City</label>
+                                    <input type="text" class="form-control" placeholder="Search city"
+                                        formControlName="city" [ngbTypeahead]="searchCity"
+                                        [resultFormatter]="cityFormatter" [inputFormatter]="cityFormatter"
+                                        [attr.disabled]='!editCtrls.addresses.get("location").get("country").value ? true : null'>
+                                </div>
+                            </ng-container>
+
+
+                            <div class="col-4">
+                                <label for="region" class="label-control">Region/Province</label>
+                                <input type="text" formControlName="region" id="region" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-2 mt-4">
+                        <p>Website <span class="star">*</span></p>
+                    </div>
+                    <div class="col-7" formArrayName="websites">
+                        <ng-container *ngFor="let item of editCtrls.websites['controls']; let i = index">
+                                <input type="url" class="form-control mt-4" placeholder="Enter Website Name"
+                                    [formControlName]="i">
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <h4>Addational Information</h4>
+            <hr>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>VAT number </p>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" placeholder="Enter VAT number" formControlName="vat">
+                    </div>
+                </div>
+            </div>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>Registration date </p>
+                    </div>
+                    <div class="col-6">
+                        <input type="date" class="form-control" placeholder="Enter registration date"
+                            formControlName="foundation_date">
+                    </div>
+                </div>
+            </div>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>Industry <span class="star">*</span></p>
+                    </div>
+                    <div class="col-6">
+                        <select name="" id="region" class="form-control" formControlName="industry">
+                            <option value="" disabled>Select one </option>
+                            <option [value]="Industry.name" *ngFor="let Industry of listOfIndustries">{{ Industry.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>Company Type <span class="star">*</span></p>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" placeholder="Enter company type"
+                            formControlName="company_type">
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row mb-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>Working Hours</p>
+                    </div>
+                    <div class="col-8">
+                        <app-busines-hours (result)="getWorkingHour($event)" [data]="[editCtrls.business_hours.value]"></app-busines-hours>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <button class="btn btn-primary" type="submit" (click)="submit()">Save</button>
+    </div>
+
+
+</form>

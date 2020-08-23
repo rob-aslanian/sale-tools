@@ -1,0 +1,60 @@
+<div class="companies-info mt-3 ml-3 p-3">
+    <div class="companies-container d-flex justify-content-between align-items-center p-0">
+        <div class="companies-search-bar  search-bar">
+            <input type="text" class="form-control" placeholder="Search">
+            <img src="assets/img/208.svg" alt="">
+        </div>
+        <div class="companies-sort">
+            <a href="#">Most Recent</a>
+        </div>
+    </div>
+
+
+
+    <div class="row companies-list-header d-flex justify-content-between mt-3 align-items-center p-2">
+        <div class="col-3">Company</div>
+        <div class="col-1">Jobs</div>
+        <div class="col-2">Email</div>
+        <div class="col-2">Phone</div>
+        <div class="col-2">Source</div>
+        <div class="col-2">Actions</div>
+    </div>
+
+    <ng-container *ngIf="!loading">
+        <div class="row companies-list d-flex justify-content-between mt-3 align-items-center"
+            *ngFor="let comp of companies?.companies">
+            <div class="col-3 company-name" (click)="open(comp._id)">
+                <img [src]="comp?.logo && comp?.logo !== '' ? comp?.logo : '/assets/img/default-company.svg'" alt="">
+                {{ comp.name }}
+            </div>
+            <div class="col-1" *ngIf="comp['jobs'] as jobs">{{ jobs.length }}</div>
+            <div class="col-2">
+                <ng-container *ngIf="comp['emails'] as emails; else:noEmail">
+                    <ng-container *ngFor="let email of emails">
+                        {{ email }} <br>
+                    </ng-container>
+                </ng-container>
+                <ng-template #noEmail>-</ng-template>
+            </div>
+            <div class="col-2">
+                <ng-container *ngIf="comp['phones'] as phones; else:noPhone">
+                    <ng-container *ngFor="let phone of phones">
+                        +{{ phone?.country_code }} {{ phone?.number }} <br>
+                    </ng-container>
+                </ng-container>
+                <ng-template #noPhone>-</ng-template>
+            </div>
+            <div class="col-2">HR.ge</div>
+            <div class="col-2">
+                <img src="assets/img/other_mail.svg" alt="" style="height: 30px;width: 40px; cursor: pointer;">
+            </div>
+        </div>
+
+    </ng-container>
+    <ngb-pagination [collectionSize]="companies?.amount" [pageSize]="'15'" [maxSize]='5' [(page)]='page'
+        (pageChange)="changePage($event)" class="d-flex justify-content-end mt-4"></ngb-pagination>
+</div>
+
+<app-modal [size]='"xl"' (closeModal)='modalType = null'>
+    <app-company-detailed-modal *ngIf="modalType === 'detailed'" [companyId]='companyId'></app-company-detailed-modal>
+</app-modal>

@@ -1,0 +1,44 @@
+.custom-modal {
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    .content {
+        z-index: 100000000000000;
+        position: absolute;
+        background: #fff;
+        left: 25%;
+        top: 1%;
+        border-radius: 4px;
+        width: 50%;
+        height: 88vh;
+        overflow-y: scroll;
+    }
+    .title {
+        background: #052337;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+        a {
+            color: #ccc;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        h4 {
+            color: white;
+            margin: 0px;
+            font-size: 20px;
+        }
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 4px;
+    }
+    .content-wrapper {
+        background: #fff;
+        width: 100%;
+        padding: 25px;
+    }
+
+}

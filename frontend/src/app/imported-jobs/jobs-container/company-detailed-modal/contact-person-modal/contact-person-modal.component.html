@@ -1,0 +1,154 @@
+<form [formGroup]="contactForm" autocomplete="off">
+    <div class="custom-modal container-fluid">
+        <div class="container">
+            <div class="w-35 content">
+                <div class="title">
+                    <h4>Contact Person</h4>
+                    <a (click)='close()'>X</a>
+                </div>
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="last-name" class="label-control">First Name</label>
+                            <input type="text" class="form-control" placeholder="Enter first name" id="last-name"
+                                formControlName="first_name"
+                                [ngClass]="{'is-invalid': ctCtrls.first_name.invalid && submitted }">
+                        </div>
+                        <div class="col-6">
+                            <label for="first-name" class="label-control">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Enter last name" id="first-name"
+                                formControlName="last_name"
+                                [ngClass]="{'is-invalid': ctCtrls.last_name.invalid && submitted }">
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <label for="departament" class="label-control">Password</label>
+
+                        <input type="password" placeholder="Password" class="form-control" formControlName="password"
+                            [ngClass]="{'is-invalid': ctCtrls.password.invalid && submitted }">
+
+                        <div class="password-criteria" style="right:-250px;"
+                            *ngIf="contactForm.get('password').invalid && submitted">
+                            <div class="arrow"></div>
+                            <ul>
+                                <li [ngClass]="{ 'd-none': !contactForm.get('password').hasError('minLength') }">
+                                    At least 8 characters </li>
+                                <li [ngClass]="{ 'd-none': !contactForm.get('password').hasError('uppercase') }">
+                                    At least one Uppercase Letter (A-Z) </li>
+                                <li [ngClass]="{ 'd-none': !contactForm.get('password').hasError('number') }">
+                                    At least one number (0-9)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <label for="departament" class="label-control">Departament</label>
+                        <input type="text" placeholder="Departament" class="form-control" formControlName="departament"
+                            [ngClass]="{'is-invalid': ctCtrls.departament.invalid && submitted }">
+                    </div>
+
+                    <div class="mt-3">
+                        <label for="Username" class="label-control">Username</label>
+                        <input type="text" class="form-control" placeholder="Auto generated" id="Username"
+                            formControlName="username"
+                            [ngClass]="{'is-invalid': ctCtrls.username.invalid && submitted }">
+                    </div>
+
+                    <div class="mt-3">
+                        <label for="Email" class="label-control">Email</label>
+                        <input type="text" class="form-control" placeholder="Enter Email" id="Email"
+                            formControlName="email" [ngClass]="{'is-invalid': contactForm.get('email').errors }">
+                    </div>
+
+                    <div class="mt-3">
+                        <label for="phone" class="label-control">Phone</label>
+                        <div class="row mx-0" formGroupName="phone">
+                            <div class="col-4 p-0 form-group" id="phone">
+                                <select class="form-control" id="country-index" formControlName="country_code">
+                                    <option value="" disabled>Country </option>
+                                    <option [value]="code.country_code" 
+                                        *ngFor="let code of countryCodes | async;">
+                                        {{  code.country }}
+                                        (+{{  code.country_code }})
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-8 form-group">
+                                <input type="text" class="form-control" id="company-phone-number" placeholder="Number"
+                                       formControlName="number">
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="mt-3">
+                            <label for="Country" class="label-control">Country</label>
+                            <select name="" id="Country" class="form-control" formControlName="country"
+                                [ngClass]="{'is-invalid': ctCtrls.country.invalid && submitted }">
+                                <option value="" disabled>Select country</option>
+                                <option *ngFor="let country of listOfCountries" [value]='country.asc'>{{ country.name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="label-control">Birthday</label>
+
+                            <div class="row mx-0">
+                                <div class="col-1 pl-0 ml-1 mt-1 mr-2 w-10 my-0">
+                                    <img src="assets/img/birthday.svg" alt="birthday">
+                                </div>
+                                <div class="col-3 pl-0 pr-1 my-0">
+                                    <select class="form-control" name="b-day" formControlName="day">
+                                        <option value="" disabled selected>Day</option>
+                                        <option *ngFor="let day of DAYS" [value]="day" tabindex="9"> {{day}} </option>
+                                    </select>
+                                </div>
+                                <div class="col px-1 my-0">
+                                    <select class="form-control" name="b-month" formControlName="month">
+                                        <option value="" disabled selected>Month</option>
+                                        <option *ngFor="let month of MONTHS" [value]="month.id" tabindex="10">
+                                            {{month.name}}
+                                        </option>
+
+                                    </select>
+                                </div>
+                                <div class="col-3 pl-1 pr-0 my-0">
+                                    <select class="form-control" name="b-year" formControlName="year">
+                                        <option value="" disabled selected>Year</option>
+                                        <option *ngFor="let year of YEARS" [value]="year">
+                                            {{year}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="mt-3">
+                            <label for="">Gender</label>
+                            <div class="mt-1">
+                                <label for="male"><img [src]="ctCtrls.gender.value === 'male' ? 
+                                                                  'assets/img/10.svg' : 'assets/img/9.svg'"
+                                        alt=""></label>
+                                <input type="radio" id="male" class="d-none" formControlName="gender" value="male"
+                                    name="gender">
+
+                                <label for="shemale"><img [src]="ctCtrls.gender.value === 'female' ? 
+                                                                    'assets/img/8.svg' : 'assets/img/7.svg'"
+                                        alt=""></label>
+                                <input type="radio" id="shemale" class="d-none" name="gender" value="female"
+                                    formControlName="gender">
+                            </div>
+
+                            <div class="mt-2lp text-right">
+                                <button class="btn btn-primary" (click)='save()'>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

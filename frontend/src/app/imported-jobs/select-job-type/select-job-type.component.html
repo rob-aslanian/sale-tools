@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center mt-4">
+    <div class="card-wrapper">
+        <a [routerLink]="['/imported-jobs', 'select-country']" >{{ params.continent || params.id }} > {{ params.country }} </a>
+        <div class="container-fluid">
+
+        </div>
+        <div class="row">
+            <div class="col-3 mt-2 mb-2" *ngFor="let job of SELECT_JOB">
+                <div class="house-card pt-4">
+                    <div class="d-flex">
+                        <div class="icon">
+                            <img [src]="job.img" alt="">
+                        </div>
+                        <div class="amount">
+                            <h4 [routerLink]="['/imported-jobs','jobs']"
+                                [queryParams]="{ abbr: params.id !== '' ? params.id : undefined ,  id: params.continent, country: params.country, job: job.title , img: params.img }">{{ job.title }}</h4>
+                            <div class="d-flex">
+                                    <p>{{ job.amount }}</p> 
+                                    <span   [ngClass]="{'status--green': job.precent > 0 ,
+                                                        'status--grey': job.precent === 0 , 
+                                                        'status--orange': job.precent < 0 }">{{ job.precent }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>

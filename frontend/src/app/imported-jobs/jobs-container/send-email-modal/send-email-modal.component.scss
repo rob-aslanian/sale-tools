@@ -1,0 +1,43 @@
+.send-email {
+    label {
+        width: 79px;
+        font-weight: 400 ;
+    }
+    span  {
+        margin-right: 10px;
+        background-color: #dce1e6;
+        color: #052337;
+        border-radius: 8px;
+        padding: 7px 15px;
+        white-space: nowrap;
+    }
+   .welcome-screen {
+        position: absolute;
+        width: 95%;
+        top: 16px;
+        left: 2.5%;
+        height: 94px;
+   };
+   textarea {
+       padding-left: 2.5%;
+       padding-right: 2.5%;
+       padding-top: 129px;
+       color: #808080;
+   }
+}    
+
+.emails {
+    display: flex;
+    justify-content: center;
+    .email {
+        position: relative;
+        button {
+            position: absolute;
+            top: -5px;
+            right: -5%;
+            color: inherit;
+            outline: unset;
+        }
+
+    }
+}

@@ -1,0 +1,21 @@
+<ng-template #appModal  #ngbModalContainer>  
+    <div  class="modal-content pt-2">
+            <div class="d-flex justify-content-between pl-4 pr-4" *ngIf='title && isBlue &&  !withoutContent'>
+                <h1> {{ title }}</h1>
+                <a  (click)="close()"  style="cursor: pointer">&#10005;</a>
+            </div>
+
+            <h2 *ngIf='!isBlue && !withoutContent' class="calendar-modal-header"> {{ title }}
+                <a style="cursor: pointer" (click)="close()">&#10005;</a>
+            </h2>
+
+            <h2 *ngIf='withoutContent' class="calendar-modal-header" style="padding-top: 2rem;"> {{ title }} </h2>
+            
+            <ng-content #content></ng-content>
+    </div>
+</ng-template>
+
+
+
+  
+

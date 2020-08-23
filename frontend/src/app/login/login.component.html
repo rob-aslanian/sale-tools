@@ -1,0 +1,33 @@
+<div class="login-container">
+    <div class="login d-flex justify-content-center align-items-center">
+        <div class="login-info text-center">
+            <div class="login-logo mb-2 m-auto">
+                <img src="assets/img/1.svg" alt="">
+            </div>
+            <p style="font-size:30px;">RIGHT<span style="color:#00F4ff">NAO SALES TOOL</span></p>
+            <div class="login-title mb-5">
+                <p>Sign in</p>
+            </div>
+            <form [formGroup]="loginForm" (submit)="login($event)">
+                <div class="form-group mt-3">
+                    <input type="text" class="form-control" placeholder="Username"
+                            formControlName="username"  [ngClass]="{ 'is-invalid':  (form.username.touched || form.username.dirty || submitted)  && form.username.errors }">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password"
+                           formControlName="password" [ngClass]="{ 'is-invalid':  (form.password.touched || form.password.dirty || submitted)  && form.password.errors }" >
+                </div>
+                <div class="checkbox d-flex justify-content-between">
+                    <div class="login-left">
+                        <div class="custom-control custom-checkbox mr-2 big-screen">
+                            <input type="checkbox" class="custom-control-input" id="check-applicants">
+                            <label class="custom-control-label" for="check-applicants">Remember me</label>
+                        </div>
+                    </div>
+                    <small class="form-text"><a href="#" class="text-secondary">Forgot Sign in info?</a></small>
+                </div>
+                <button class="btn btn-login btn-lg float-left mt-2 w-100" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>

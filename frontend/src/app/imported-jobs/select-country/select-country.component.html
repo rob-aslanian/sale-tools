@@ -1,0 +1,31 @@
+<div class="container-fluid continent mt-3" style="width:90%;">
+    <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-4  mb-3" *ngFor="let country of COUNTRIES" >
+            <div class="continent-box p-0">
+                <div class="box-img">
+                    <img [src]="country.img" alt="">
+                </div>
+                <div class="box-title">
+                    <h5>{{ country.name }}</h5>
+                </div>
+                <div class="box-list" >
+                    <ul>
+                        <li *ngFor="let list of country['list']" (click)='expand( $event )' >
+                            {{ list.name }}
+                            <div class="d-none anime">
+                                <ng-container *ngFor="let item of list['list']">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <img [src]="item['img']" alt="flag" *ngIf="item['img']">
+                                        <p class="mb-0 pl-3" 
+                                           [routerLink]="['/imported-jobs','select-job']"  
+                                           [queryParams]="{ id: item.id !== '' ? item.id : undefined ,country: item.name, continent: list.name, img: item['img'] }">{{ item.name }}</p>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

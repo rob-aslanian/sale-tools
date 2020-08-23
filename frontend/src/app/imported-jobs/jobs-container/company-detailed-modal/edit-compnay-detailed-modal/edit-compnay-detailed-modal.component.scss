@@ -1,0 +1,37 @@
+.edit-company {
+    h4 {
+        margin-bottom: 1.8rem;
+        font-size: 1.1rem;
+        color: #052337;
+    };
+    p {
+        color: #052337;
+        font-weight: 500px;
+    }
+    span {
+        color: #808080;
+    }
+    .field {
+        &:not(:first-child) {
+            margin-top: 1rem;
+        }
+    }
+    img {
+        cursor: pointer;
+    }
+    button  {
+        margin-top: 10px;
+    }
+}
+.star {
+    color: #00D4E3 !important;
+}
+.toggled {
+    background: #dce1e6;
+    padding: 15px;
+    border-radius: 4px;
+}
+.close-god {
+    cursor: pointer;
+    color: #dce1e6;
+}

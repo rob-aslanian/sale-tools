@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn-login {
+    background-color: #00f4ff;
+    color: #052337;
+};
+
+input[type='checkbox'] {
+    user-select: none;
+    +label {
+        user-select: none;        
+    };
+}
+
+.form-control {
+   background-image: unset !important;
+   padding-right: 10px !important;
+}
+
+textarea {
+    resize: none;
+}
+label {
+    color: #052337;
+    margin-top: 10px;
+}
+.backgroundless {
+    background:none;
+    outline:none;
+    border: none;
+    color:#00F4FF;
+    &:hover {
+        cursor: pointer;
+        // text-decoration: underline;
+    }
+    &:disabled {
+        color: #cccccc;
+        text-decoration: none;
+    }
+}
+button {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.is-invalid{
+    border: 1px solid #ff6633;
+  }
+
+  .company-name {
+      display: flex;
+      align-items: center;
+      position: relative;
+      img {
+          width: 25px;
+          height: 25px;
+          margin-right: 1rem;
+      }
+  }
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: #cccccc;
+    border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #244361;
+    border-radius: 10px;
+    &:hover {
+        background: #052337; 
+    }
+}

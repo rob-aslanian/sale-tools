@@ -1,0 +1,36 @@
+.login-container{
+    width:100vw;
+    height:100vh;
+    position: absolute;
+    top:0;
+    right:0;
+    background-color: #052337;
+    background-repeat: no-repeat;
+    color:white;
+        .login{
+            font-size:14px;
+            height:100vh;
+                .login-logo{
+                    width:60px;
+                    height:70px;
+                  
+                }
+                .login-info{
+                    max-width:400px;
+                    width: 44%;
+                    @media screen and (max-width: 590px) {
+                        width: 88%;
+                        max-width: unset !important;
+                   };
+                }
+                .login-title{
+                    font-size:30px;
+                    line-height:35px;
+                }
+                .form-check-input{
+                    margin:0;
+                    position: relative;
+                }
+        }
+    } 
+

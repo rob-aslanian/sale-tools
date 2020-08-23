@@ -1,0 +1,29 @@
+<div class="p-4 send-email">
+    <form [formGroup]="emailFormGroup" (ngSubmit)="sendEmail()">
+        <div class="d-flex mt-1" [ngClass]="{'flex-wrap': emails.length > 3}">
+            <label for="to" class="label-control"> To </label>
+            <div class="emails" >
+                <span *ngFor="let email of emails; let i = index" class="email">{{ email }} 
+                    <button type="button" class="backgroundless" (click)="remove(i)">x</button>
+                </span>
+            </div>
+            <input type="email" class="form-control" (keydown.enter)="addEmail(email , $event)" #email
+                    [ngClass]="{'mr-5 mt-2': emails.length > 3}">
+        </div>
+
+        <div class="d-flex mt-3" >
+            <label for="Subject" class="label-control"> Subject </label>
+            <input type="text" id="Subject" class="form-control" placeholder="Enter Subject" autocomplete="off"
+                formControlName="subject">
+        </div>
+        <div class="mt-4 position-relative">
+            <img class="welcome-screen" src="assets/img/welcome.png" alt="">
+            <textarea class="form-control" formControlName="text" rows="9"
+                [ngClass]="{'is-invalid': emailFormGroup.get('text').errors || ( submitted && emailFormGroup.get('text').invalid  ) }"></textarea>
+        </div>
+        <div class="mt-3 mb-3 text-right">
+            <button class="btn btn-primary" type="submit" [ngClass]="{'btn-light': emails.length === 0,
+                                 'btn-primary': emails.length > 0 }" >Send</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,60 @@
+.sidebar{
+display:flex;
+flex-direction: column;
+width:100%;
+min-width: 225px;
+background-color:#052337;
+user-select: none;
+min-height: 95vh;
+    ul{
+        list-style: none;
+        padding:0px;    
+        margin-top:15px;  
+    }
+    li {
+        color:#808080;
+        // padding-left: 40px;
+        font-size: 1rem;
+        line-height: 40px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    li:hover{
+         background-color:#001428;
+    }
+    li a:hover{
+        color:white;
+        text-decoration: none;
+    }
+    img {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+.pointers {
+    transform: rotate(90deg);
+};
+.job {
+    padding-left: 35px;
+};
+
+.menu {
+    li {
+        padding-left: 93px;
+    }
+}
+
+.router-link-active {
+    color: #00D4E3 !important;
+    background: #264361 !important;
+};
+.items {
+    
+}
+
+.here {
+    ::ng-deep a {
+        color: #00D4E3;
+    }
+}

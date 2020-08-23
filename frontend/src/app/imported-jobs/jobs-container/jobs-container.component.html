@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row  flex-nowrap">
+        <div class="col-2 pl-0 pr-0 sidebar">
+                    <ul>
+                        <li [routerLink]="['/imported-jobs']"><div>
+                            <img class="pointers" src="assets/img/147.svg" alt=""> {{ params.id }}</div></li>
+                        <li [routerLink]="['/imported-jobs']"><div><img class="pointers" src="assets/img/147.svg" alt="">
+                             <img [src]="params.img" style="background: #ffffff; border-radius:50%"> {{ params.country }}
+                            </div>
+                        </li>
+                        <li class="job" [routerLink]="['/imported-jobs','select-job']" [queryParams]="params" ><img [src]="job.img" style="margin-right: 10px; width: 40px;">{{ job.title }}</li>
+                        <div class="menu" >
+                            <li [routerLink]="['/imported-jobs','jobs', 'new-lead']" 
+                                [queryParams]="params" 
+                                routerLinkActive="router-link-active" 
+                                [routerLinkActiveOptions]="{extact: true}">New Leads</li>
+                            <li [routerLink]="['/imported-jobs','jobs', 'pre-sales']" 
+                                [queryParams]="params" 
+                                routerLinkActive="router-link-active" 
+                                [routerLinkActiveOptions]="{extact: true}">Pre-Sales</li>
+                            <li [routerLink]="['/imported-jobs','jobs', 'sales']" 
+                                [queryParams]="params" 
+                                routerLinkActive="router-link-active" 
+                                [routerLinkActiveOptions]="{extact: true}">Sales</li>
+                            <li>CAM</li>
+                            <li>Statistics</li>
+                            <li>Locations</li>
+                        </div>
+                    </ul>
+        </div>
+        <div class="col-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>    
+
+<div class="here">
+    <ng-template #placeholder></ng-template>
+</div>

@@ -1,0 +1,167 @@
+<div class="company-detailed pt-3"  *ngIf="company">
+    <button type="button" class="btn btn-primary ml-2" (click)='isEdit = true'>Edit</button>
+    <div class="container-fluid pl-4 pr-4">
+        <div class="row">
+            <div class="col-7 company-details-wrapper">
+                <div class="company-photo">
+                    <div class="text-center">
+                        <img [src]="company?.logo && company?.logo !== '' ? company?.logo : '/assets/img/default-company.svg'" alt="">
+                        <p *ngIf="company.name">{{ company.name }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="left-side">
+                    <div class="contact">
+    
+                        <div class="mt-4">
+                            <p> Contact </p>
+                            <span *ngIf="company['emails'] as emails">
+                                <img src="assets/img/205.svg" alt=""> 
+                                {{ emails | delimetr }}
+                            </span>
+                            <span *ngIf="company['phones'] as phones">
+                                <img src="assets/img/206.svg" alt="" > 
+                                <ng-container *ngFor="let phone of phones">
+                                    +{{ phone?.country_code }} {{ phone?.number }} <br>
+                                </ng-container>
+                            </span>
+                            <span *ngIf="company['websites'] as websites">
+                                <img src="assets/img/185.svg" alt="">
+                                {{ websites | delimetr }}
+                            </span>
+                        </div>
+    
+                    </div>
+    
+                    <div class="addational-information mt-4">
+                        <p>Addational information</p>
+                        <span *ngIf="company.foundation_date as foundation_date">Registation Date: {{ foundation_date }}</span>
+                        <span *ngIf="company.industry as industry">Industry : {{ industry }}</span>
+                        <span *ngIf="company.company_type as company_type">Company type: {{ company_type }}</span>
+                        <span class="d-flex" *ngIf="company.business_hours as business_hour">
+                            Working Hours: 
+                                    <span class="mt-0 ml-2">
+                                        <ng-container *ngIf="business_hour.week_days.length > 1; else: oneDay">
+                                                {{ business_hour.week_days[0] | titlecase }} - {{ business_hour.week_days[business_hour.week_days.length - 1] | titlecase }}
+                                        </ng-container>
+            
+                                        <ng-template #oneDay>
+                                                {{ business_hour.week_days[0] | titlecase }}
+                                        </ng-template>
+            
+                                        <!-- {{ business_hour.week_days[0] }} - {{ business_hour.week_days[business_hour.week_days.length - 1] }} -->
+                                        <ng-container *ngIf="business_hour.hour_from && business_hour.hour_to">
+                                            | {{ business_hour.hour_from }} - {{ business_hour.hour_to }}
+                                        </ng-container>
+                                    </span>  
+                    </span>
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="contact-person mb-3">
+                    <div class="d-flex justify-content-between mb-3 Contact">
+                        <p class="m-0">Contact Person</p>
+                        <a class="m-0" (click)='openModal("Contact Person")'>Add</a>
+                    </div>
+                    <div class="add-client" *ngIf="company?.contact_persons as persons; else:noPerson">
+                        <ng-container *ngFor="let person of persons">
+                                <div class="d-flex" *ngIf="person.id !== null; else:noPerson">
+                                        <span>Name: {{  person.first_name }}  {{ person.last_name }}</span>
+                                        <span class="ml-3" *ngIf="person?.departament">Position: {{ person?.departament }}</span>
+                                    </div>
+                        </ng-container>
+                          
+                        
+                    </div>
+                            <ng-template #noPerson>
+                                <span>Add Contact Person</span>
+                            </ng-template>
+                    
+                </div>
+
+                <div class="mb-3" *ngIf="company?.status ||  company?.status === 'pre_sale'">
+                    <button class="btn btn-primary mr-3">Move to Sales</button>
+                    <button class="btn btn-light">Rejected</button>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="tabs d-flex">
+                    <h6 class="mr-3" [ngClass]="{'active': isCommentesActive}" (click)='isCommentesActive = true'>
+                        Comments</h6>
+                    <h6 [ngClass]="{'active': !isCommentesActive}" (click)='isCommentesActive = false'>Active History
+                    </h6>
+                </div>
+                <div class="content-container">
+
+                    <ng-container *ngIf="isCommentesActive; else history">
+                        <div class="wrapper-comments">
+                            <div class="second" *ngFor="let item of comments; let i = index">
+                                <div class="comment-box">
+                                  <textarea #comment class="comment" cols="20" rows="5" disabled> {{ item.text }}</textarea>
+                                </div>
+                                
+                                <span>Added on {{ item.created_at | date }} by vova</span>
+                                <div class="edit-comment d-flex">
+                                    <button class="m-0 backgroundless p-0" (click)="editComment(item._id , comment)">Edit | </button>
+                                    <button class="m-0 backgroundless p-0" (click)='deleteComment( item._id, i )'> Delete</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="contact-person mb-3 mt-3">
+                            <div class="d-flex justify-content-between mb-3 Contact">
+                                <p class="m-0">Add Comment</p>
+                                <button  class="m-0 backgroundless p-0" (click)='addComment()'>Add</button>
+                            </div>
+                            <textarea class="form-control" rows="4" 
+                                      placeholder="Enter Your Comment"  [(ngModel)]="comment"></textarea>
+                        </div>
+                    </ng-container>
+                    <ng-template #history>
+                            <ng-container *ngIf="(histories | async) as histories">
+                                    <div class="mt-2" *ngIf="histories.amount > 0">
+                                        <div class="histories" *ngFor="let history of histories.histories">
+                                                <div class="history">
+                                                    <time> {{ history.created_at | date:'medium' }} </time>                     
+                                                    <span [innerHTML]="history.text" class="mt-3"></span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment" *ngIf="histories.amount <= 0">No Activity History yet</div>
+                            </ng-container>
+                            
+                           
+                    </ng-template>
+
+                </div>
+                <!-- <div class="sales-agent">
+                        <div class="d-flex align-items-center">
+                            <p class="mr-3 mb-0">Sales Agent</p>
+                            <img class="user-photo" src="assets/img/we-are-hiring.jpg" alt="">
+                            <a class="mt-0 pl-3">Dachi Gigauri</a>
+                        </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="edit-company-wrapper" *ngIf="isEdit" style="height: 104%;top: -31px;"></div>
+
+        <div class="edit-company-modal" [ngClass]="{'d-block': isEdit }" >
+                <app-edit-compnay-detailed-modal (result)='isEdit = false' [data]='company'></app-edit-compnay-detailed-modal>
+        </div>
+
+    </div>
+</div>
+
+ 
+<ng-container *ngIf="modalType === 'Contact Person'">
+        <div class="edit-company-wrapper"></div>
+        <app-contact-person-modal (result)='getRestult($event)' [data]='company' ></app-contact-person-modal>
+</ng-container>
+
+

@@ -1,0 +1,166 @@
+$dark-cyan: #00D4E3;
+
+
+.company-detailed {
+    position: relative;
+    .edit {
+        position: absolute;
+        top: -20px;
+        left: 21px;
+        color: $dark-cyan;
+        cursor: pointer;
+    }
+    .company-photo {
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    }
+    .company-details-wrapper {
+        span {
+            display: block;
+            color: #808080;
+            font-size: 14px;
+            padding-right: 10px;
+            margin-top: 10px;
+            img {
+                width: 20px;
+                margin-right: 10px;
+            }
+        }
+        border-right: 1px solid #ccc;
+    }
+    p {
+        font-size: 1.1rem;
+        color: #052337;
+    }
+    .contact-person {
+        .Contact {
+            a { color: $dark-cyan; cursor: pointer; }
+        }
+        .add-client {
+            height: 100px;
+            border-radius: 4px;
+            color: #808080;
+        }
+    }
+    .tabs {
+        h6 {
+            color: #052337;
+            cursor: pointer;
+        }
+        .active {
+            border-bottom: 2px solid $dark-cyan;
+            margin-bottom: 1px;
+          }
+    }
+    .content-container {
+        .wrapper-comments {
+            height: 574px;      
+            overflow-y: auto;
+        }   
+        .second {
+            overflow-y: auto;
+            .comment-box{
+                position: relative;
+                z-index: 1;
+                .comment {
+                    height: 50px;
+                    overflow: auto;
+                    background: #dce1e6;
+                    margin-top: 10px;
+                    padding: 10px;
+                    border-radius: 4px;
+                    color: #052337;
+                    font-size: 0.8rem;
+                    margin-top: 20px;
+                    border:unset;
+                    transition: .3s background ease-in-out;
+                     &:focus{
+                        background: #fff;
+                    }
+                }
+                &::after {
+                    content: "";
+                    display: block;
+                    width: 8px;
+                    height: 20px;
+                    position: absolute;
+                    background: #dce1e6;
+                    border-bottom-right-radius: 100%;
+                    top: 55px;
+                    z-index: -1;
+                };
+            }
+            
+            span {
+                font-size: 12px;
+                padding-top: 22px;
+                display: block;
+            }
+            .edit-comment {
+                a {
+                    color: #00D4E3;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    textarea {
+        height: 106px;
+        background: #dce1e6;
+        color: #808080;
+     }
+     .user-photo {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+     }
+  
+};
+.left-side {
+    height: 420px;
+    // margin-bottom: 5rem;
+}
+.edit-company-modal {
+    position: absolute;
+    width: 76%;
+    height: 102.6%;
+    z-index: 2;
+    background: #fff;
+    top: -32px;
+    left: 0px;
+    border-radius: 4px;
+    display: none;
+    overflow-y: auto;
+    // transition: 3s;
+};
+
+.edit-company-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #ccc;
+    top: 0px;
+    opacity: 0.4;
+    left: 0px;
+    border-radius: 4px;
+ }
+
+
+
+ .histories{
+     .history {
+        display: flex;
+        flex-direction: column;
+        background: #dce1e6;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        color: #052337;
+        font-size: 0.8rem;
+        margin-top: 20px;
+     }
+ }
